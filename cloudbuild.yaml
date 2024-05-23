@@ -20,7 +20,5 @@ steps:
       - '--cpu=1'
       - '--memory=2048Mi'
       - '--allow-unauthenticated'
-      - '--set-secrets=BUCKET_NAME=bucket_name:latest'
 images:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/ml-deploy-artifact/model-image-last'
-logsBucket: 'gs://ml-deploy-110803/logs'
