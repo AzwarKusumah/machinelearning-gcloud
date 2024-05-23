@@ -1,5 +1,6 @@
-import tf from '@tensorflow/tfjs-node'
-import InputError from '../exceptions/InputError'
+const tf = require("@tensorflow/tfjs-node");
+const InputError = require("../exceptions/InputError");
+const fs = require("fs");
 
 async function predictClassification(model, image) {
     try {
@@ -13,15 +14,20 @@ async function predictClassification(model, image) {
         const score = await prediction.data();
         const confidenceScore = Math.max(...score) * 100;
 
-        const label = confidenceScore >= 0.5 ? "Cancer" : "Non-cancer";
+        let suggestion, label;
 
-        const suggestion =
-            label === "Cancer" ? "Segera periksa ke dokter!" : "Anda sehat!";
+        if (confidenceScore > 50) {
+            label = "Cancer";
+            suggestion = "Segera konsultasi dengan dokter terdekat";
+        } else {
+            label = "Not Cancer";
+            suggestion = "Selamat bukan cancer, jadi anda bisa tidur dengan nyenyak";
+        }
 
-        return { label, suggestion };
+        return { label, suggestion, confidenceScore };
     } catch (error) {
-        throw new InputError(`Terjadi kesalahan input: ${error.message}`);
+        throw new InputError(`Terjadi kesalahan input : ${error.message}`);
     }
 }
 
-export default predictClassification;
+module.exports = predictClassification;

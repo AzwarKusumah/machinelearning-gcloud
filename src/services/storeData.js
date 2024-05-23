@@ -1,4 +1,4 @@
-import { Firestore } from '@google-cloud/firestore';
+const { Firestore } = require("@google-cloud/firestore");
 
 const db = new Firestore({ databaseId: "predictions" });
 
@@ -15,5 +15,4 @@ async function getData() {
 
     return data;
 }
-
-export default { storeData, getData };
+module.exports = { storeData, getData };

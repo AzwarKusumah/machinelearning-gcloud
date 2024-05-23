@@ -1,10 +1,10 @@
-import { postPredictHandler, getHistoryHandler, defaultDarling } from '../server/handler'
+const h = require("../server/handler");
 
 const routes = [
     {
         path: '/predict',
         method: 'POST',
-        handler: postPredictHandler,
+        handler: h.postPredictHandler,
         options: {
             payload: {
                 allow: 'multipart/form-data',
@@ -15,13 +15,13 @@ const routes = [
     {
         path: '/predict/histories',
         method: 'GET',
-        handler: getHistoryHandler,
+        handler: h.getHistoryHandler,
     },
     {
         path: '/',
         method: 'GET',
-        handler: defaultDarling,
+        handler: h.defaultDarlin,
     },
 ];
 
-export default routes;
+module.exports = routes;

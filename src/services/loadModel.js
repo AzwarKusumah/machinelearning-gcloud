@@ -1,5 +1,9 @@
-import tf from '@tensorflow/tfjs-node'
+const tf = require("@tensorflow/tfjs-node");
+const dotenv = require("dotenv");
+
+dotenv.config({ path: `${__dirname}/../../.env` });
+
 async function loadModel() {
     return tf.loadGraphModel(process.env.MODEL_URL);
 }
-export default loadModel;
+module.exports = loadModel;

@@ -1,6 +1,6 @@
-import predictClassification from '../services/inferenceService.js';
-import crypto from 'crypto';
-import { storeData, getData } from '../services/storeData.js';
+const predictClassification = require("../services/inferenceService");
+const crypto = require("crypto");
+const dataAct = require("../services/storeData");
 
 async function postPredictHandler(request, h) {
     const { image } = request.payload;
@@ -20,7 +20,7 @@ async function postPredictHandler(request, h) {
         createdAt: createdAt,
     };
 
-    await storeData(id, data);
+    await dataAct.storeData(id, data);
 
     const response = h.response({
         status: "success",
@@ -37,14 +37,14 @@ async function postPredictHandler(request, h) {
 async function getHistoryHandler(request, h) {
     const response = h.response({
         status: "success",
-        data: await getData(),
+        data: await dataAct.getData(),
     });
     response.code(200);
     return response;
 }
 
-async function defaultDarling(request, h) {
-    return "API IS RUNNING DARLING";
+async function defaultDarlin(request, h) {
+    return "API IS RUNNING DARLIN'";
 }
 
-export default { postPredictHandler, getHistoryHandler, helloWorld };
+module.exports = { postPredictHandler, getHistoryHandler, defaultDarlin };

@@ -1,4 +1,4 @@
-import ClientError from './ClientError';
+const ClientError = require("../exceptions/ClientError");
 
 class InputError extends ClientError {
     constructor(message) {
@@ -7,4 +7,4 @@ class InputError extends ClientError {
     }
 }
 
-export default InputError;
+module.exports = InputError;
